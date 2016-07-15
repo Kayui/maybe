@@ -37,10 +37,10 @@ class Canvas
         // If we wish to scale the game, on bigger or smaller screens
         // we could set the canvas size to be different
         this._ctx.canvas.width = this.width();
-        this._ctx.canvas.height = this.width();        
+        this._ctx.canvas.height = this.height();        
         // For example
-        this._ctx.canvas.width = 640;
-        this._ctx.canvas.height = 320;        
+        // this._ctx.canvas.width = 640;
+        // this._ctx.canvas.height = 320;        
         
 		this.fill();
     	

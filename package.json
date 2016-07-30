@@ -7,5 +7,9 @@
 "window": { 
     "toolbar": true,  
      "fullscreen": true
- }
+ },
+    "dependencies" : {
+        "nw" : "latest",
+        "phaser" : "2.6.1"
+    }
 }

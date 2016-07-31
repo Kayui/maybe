@@ -1,5 +1,24 @@
 'use strict';
-var guy = new Guy(50,50, 16, 16);
-var jerk = new Jerk(344,360, 16, 16);
-var canvas = new Canvas();
-var menu = new Menu();
+
+// Input mapping
+var cursors, wasd;
+
+// The game object set to 99% vw and 98% vh, 
+// Phaser.Auto tries webgl or canvas rendering modes
+var lommi;
+var swirly1;
+var swirly2;
+
+var game = new Phaser.Game("99%", "98%", Phaser.AUTO, 'game', {
+    preload: assetLoader,
+    create: create,
+    update: update
+});
+
+// Use this thing to load any assets requried
+// the first parameter is used as an identifier when setting sprites and such
+function assetLoader() {
+    game.load.image('swirly', 'swirly.png');
+    game.load.image('lommi', 'lommi.png');
+}
+

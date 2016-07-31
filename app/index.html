@@ -1,19 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
   <meta charset="utf-8" />
-    <title>Cult Of Maybe</title>
-  </head>
-  <body>
-    <!-- Should always be loaded first !-->
-    <script src='library/nw.js'></script>
-    <script src='library/things/jerk.js'></script>
-    <script src='library/things/guy.js'></script>
-    <script src='library/Canvas.js'></script>
+  <title>Cult Of Maybe</title>
+</head>
 
-    <script src='library/Menu.js'></script>
+<body>
 
-    <!-- Should always be loaded last !-->
-    <script src='library/init.js'></script>
-  </body>
+  <!-- Should always be loaded first !-->
+  <script src='../node_modules/phaser/build/phaser.js'></script>
+  <script src='library/nw.js'></script>
+  <script src='library/things/lommi.js'></script>
+  <script src='library/things/swirly.js'></script>
+  <script src='library/Canvas.js'></script>
+  <script src='library/Menu.js'></script>
+
+  <!-- Should always be loaded last !-->
+  <script src='library/init.js'></script>
+  <style>
+    body {
+      background: black;
+    }
+    
+    canvas {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+    }
+  </style>
+</body>
+
 </html>

@@ -22,6 +22,8 @@ function create() {
         right: game.input.keyboard.addKey(Phaser.Keyboard.D),
     };
 
+    escape = game.input.keyboard.addKey(Phaser.Keyboard.ESC);
+
     // Make your things! z-index is in order of creation.
     swirly1 = new Swirly("center", "center", 0.03, "swirly");
     swirly2 = new Swirly("center", "center", -0.02, "swirly");

@@ -1,31 +1,49 @@
 'use strict';
+class Canvas {
+  constructor() {
+    this.game = new Phaser.Game("100", "100", Phaser.AUTO, 'gg',
+    { preload: this.preload,
+      create: this.create,
+      update: this.update,
+      render: this.render });
+  }
+  getResolution() {
+    /* TODO: MUCH LATER TODO
+    create a function that decides on which resolution to scale to */
+    this.maxDimension = new Dimension(640,480);
+  }
+  setResolution() {
+    this.game.scale.maxWidth = this.maxDimension.getX();
+    this.game.scale.maxHeight = this.maxDimension.getY();
 
-// Game loop!
-// Uses requestAnimationFrame behind the scenes keeping  
-// timing inline with the devices refresh rate
-function update() {
-    menu();
-    swirly1.swirl();
-    swirly2.swirl();
+    //this.game.stage.scale.startFullScreen();
+    // We want to scale up to the preferred resolution
+    this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    //this.game.stage.scaleMode = Phaser.StageScaleMode.SHOW_ALL;
+    this.game.stage.scale.setShowAll();
+    this.game.stage.scale.refresh();
+
+  }
+
+  preload() {
+    console.log(this);
+    $_.getResolution();
+    $_.setResolution(this);
+  }
+
+  create() {
+    // CALL SOMETHING ELSE
+  }
+
+  update() {
+    // CALL SOMETHING ELSE
+  }
+
+  render() {
+    // CALL SOMETHING ELSE
+  }
+
+
 }
 
-// Set everything up for the first frame
-function create() {
-    // Registering any input keys, see Menu.js for use
-    // arrow buttons
-	cursors = game.input.keyboard.createCursorKeys();
-    // wasd
-    wasd = {
-        up: game.input.keyboard.addKey(Phaser.Keyboard.W),
-        left: game.input.keyboard.addKey(Phaser.Keyboard.A),
-        down: game.input.keyboard.addKey(Phaser.Keyboard.S),
-        right: game.input.keyboard.addKey(Phaser.Keyboard.D),
-    };
-
-    escape = game.input.keyboard.addKey(Phaser.Keyboard.ESC);
-
-    // Make your things! z-index is in order of creation.
-    swirly1 = new Swirly("center", "center", 0.03, "swirly");
-    swirly2 = new Swirly("center", "center", -0.02, "swirly");
-    lommi = new Lommi("center", "center", "lommi");
-}
+let $_ = new Canvas();

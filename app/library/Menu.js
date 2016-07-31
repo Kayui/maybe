@@ -8,7 +8,7 @@ function menu() {
 	}
 
 	// Moving up
-	if (cursors.up.isDown || wasd.up.isDown) {
+/*	if (cursors.up.isDown || wasd.up.isDown) {
 		lommi.moveUp();
 	}
 	// Moving down
@@ -23,5 +23,5 @@ function menu() {
 	// Moving right
 	else if (cursors.right.isDown || wasd.right.isDown) {
 		lommi.moveRight();
-	}
+	}*/
 }

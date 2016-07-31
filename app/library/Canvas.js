@@ -18,17 +18,20 @@ class Canvas {
 
     //this.game.stage.scale.startFullScreen();
     // We want to scale up to the preferred resolution
-    this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    this.game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
     //this.game.stage.scaleMode = Phaser.StageScaleMode.SHOW_ALL;
-    this.game.stage.scale.setShowAll();
-    this.game.stage.scale.refresh();
-
+    this.game.scale.updateLayout();
   }
 
   preload() {
-    console.log(this);
+    window.addEventListener('resize', function() {
+      $_.game.renderer.resize(100, 100);
+      $_.getResolution();
+      $_.setResolution();
+    });
     $_.getResolution();
-    $_.setResolution(this);
+    $_.setResolution();
+
   }
 
   create() {

@@ -5,48 +5,22 @@
 // TILE SIZES SHOULD NOT BE HARD-CODED HERE!!!!
 
 class Tile {
-  constructor(x, y, tilex, tiley) {
+  constructor(name, x, y, tilex, tiley, tileobj) {
     this.x = x;
     this.y = y;
     this.tilex = tilex;
     this.tiley = tiley;
+    this.tileobj = tileobj;
+    this.name = name;
+    console.log("Nýtt tile");
   }
 
   draw() {
-    this.tile = $_.game.add.sprite(this.x * this.tilex, this.y * this.tiley, this._getTexture());
+    console.log("TEIKNA ok nafn er:"+this.name+":");
+    this.tile = $_.game.add.sprite(this.x * this.tilex, this.y * this.tiley, this.name);
   }
 
   getName() {
-    return this._getName == undefined ? "Undefined name" : this._getName();
-  }
-}
-
-class GrassTile extends Tile {
-  _getName() {
-    return "Grass Tile"
-  }
-
-  _getColor() {
-    // Cozy green yo
-    return 0x5D7E62;
-  }
-
-  _getTexture() {
-    return "grass";
-  }
-}
-
-class DirtTile extends Tile {
-  _getName() {
-    return "Dirt Tile"
-  }
-
-  _getColor() {
-    // Cozy brown yo
-    return 0xA68C69;
-  }
-
-  _getTexture() {
-    return "dirt";
+    return tileobj.Name;
   }
 }

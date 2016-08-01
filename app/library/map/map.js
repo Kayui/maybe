@@ -13,15 +13,11 @@ class WorldMap {
       this.height = data.y;
       this.tile = {x: data.tiles.x, y: data.tiles.y};
       this.tiles = data.tiles;
-      this.neededTiles = {};
-      for (let x in this.tiles) {
-        var type = this.tiles[x].type;
-        if (type !== undefined && this.neededTiles[type] === undefined) {
-          this.neededTiles[type] = "getTile";
-          socket.emit('Tile:Get', {tile: type});
-        }
-      }
+      this.neededTiles = data.tilesconfig;
       console.log(this.neededTiles);
+      for (let i in this.neededTiles) {
+        $_.game.load.image('grass', '/assets/grass.png');
+      }
       this.generate();
       this.draw();
       $_.sendEvent('MapReady');
@@ -36,8 +32,9 @@ class WorldMap {
             var _x = tile.x;
             var _y = tile.y;
             var _z = tile.z;
+            var name = tile.type;
             if (this.map[_z] === undefined) this.map[_z] =[];
-            this.map[_z][x] = new GrassTile(_x,_y,this.tile.x, this.tile.y);
+            this.map[_z][x] = new Tile(name, _x,_y,this.tile.x, this.tile.y, this.neededTiles[name]);
           }
         }
   }
@@ -45,6 +42,7 @@ class WorldMap {
     // Draw all the things!
     for (let z in this.map) {
       for (let x in this.map[z]) {
+        console.log("hello");
         this.map[z][x].draw();
       }
     }

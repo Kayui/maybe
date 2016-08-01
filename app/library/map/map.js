@@ -1,5 +1,8 @@
 "use strict";
 
+
+// TMAP SIZE SHOULD NOT BE HARDCODED!!!!
+
 class WorldMap {
   constructor() {
     this.map = $_.game.add.tilemap();

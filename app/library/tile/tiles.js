@@ -2,6 +2,8 @@
 
 // This should probably be tied to SQLlite and have images no squares :)
 
+// TILE SIZES SHOULD NOT BE HARD-CODED HERE!!!!
+
 class Tile {
   constructor() {
 

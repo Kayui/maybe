@@ -16,6 +16,9 @@ class WorldMap {
       }
     }
 
+
+  }
+  draw() {
     // Draw all the things!
     for(let x = 0; x < $_.maxDimension.getX(); x+=32){
       for(let y = 0; y < $_.maxDimension.getY(); y+=32){

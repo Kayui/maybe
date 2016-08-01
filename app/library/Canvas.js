@@ -60,7 +60,6 @@ class Canvas {
     });
     $_.game.stage.backgroundColor = "#333333";
 
-
     $_.getResolution();
     $_.setResolution();
 

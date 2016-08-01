@@ -38,7 +38,7 @@ class DirtTile extends Tile {
   }
 
   _getColor() {
-    // Cozy green yo
+    // Cozy brown yo
     return 0xA68C69;
   }
 }

@@ -73,6 +73,10 @@ class Canvas {
     this.game.world.setBounds(0, 0, 1920, 1440);
     player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'nothing really');
     this.game.camera.follow(player);
+    this.PlayerMoveUp = function() {
+      alert("vei");
+    }.bind(this);
+    $_.getEvent('KeyPressedUp', this.PlayerMoveUp);
   }
 
   update() {

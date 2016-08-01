@@ -5,15 +5,17 @@
 // TILE SIZES SHOULD NOT BE HARD-CODED HERE!!!!
 
 class Tile {
-  constructor(x, y) {
+  constructor(x, y, tilex, tiley) {
     this.x = x;
     this.y = y;
+    this.tilex = tilex;
+    this.tiley = tiley;
   }
 
   draw() {
     this.tile = $_.game.add.graphics();
     this.tile.beginFill(this._getColor());
-    this.tile.drawRect(this.x, this.y, 32, 32);
+    this.tile.drawRect(this.x * this.tilex, this.y*this.tiley, 32, 32);
   }
 
   getName() {

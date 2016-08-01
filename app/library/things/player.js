@@ -14,11 +14,44 @@ class Player {
     else {
       this.y = y;
     }
-
     this.texture = texture;
+  
+    this.makeReady = function() {
+      this.draw();
+      this.keyReady();
+    }.bind(this);
+
+    $_.getEvent('MapReady', this.makeReady);
+
+    }
+
+  draw(){
     this.sprite = $_.game.add.sprite(this.x, this.y, this.texture);
     $_.game.camera.follow(this.sprite);
     this.sprite.anchor.setTo(0.5, 0.5);
+  }
+
+  keyReady() {
+    this.PlayerMoveUp = function() {
+      this.moveUp();
+      console.log(this.y);
+    }.bind(this);
+    $_.getEvent('KeyPressedUp', this.PlayerMoveUp);
+
+    this.PlayerMoveDown = function() {
+      this.moveDown();
+    }.bind(this);
+    $_.getEvent('KeyPressedDown', this.PlayerMoveDown);
+
+    this.PlayerMoveLeft = function() {
+      this.moveLeft();
+    }.bind(this);
+    $_.getEvent('KeyPressedLeft', this.PlayerMoveLeft);
+
+    this.PlayerMoveRight = function() {
+      this.moveRight();
+    }.bind(this);
+    $_.getEvent('KeyPressedRight', this.PlayerMoveRight);
   }
 
   moveLeft() {

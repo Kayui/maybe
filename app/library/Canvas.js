@@ -72,26 +72,6 @@ class Canvas {
     this.game.world.setBounds(0, 0, 1920, 1440);
     this.player = new Player(200, 200, "nothing really");
 
-    this.PlayerMoveUp = function() {
-      this.player.moveUp();
-      console.log(this.player.y);
-    }.bind(this);
-    $_.getEvent('KeyPressedUp', this.PlayerMoveUp);
-
-    this.PlayerMoveDown = function() {
-      this.player.moveDown();
-    }.bind(this);
-    $_.getEvent('KeyPressedDown', this.PlayerMoveDown);
-
-    this.PlayerMoveLeft = function() {
-      this.player.moveLeft();
-    }.bind(this);
-    $_.getEvent('KeyPressedLeft', this.PlayerMoveLeft);
-
-    this.PlayerMoveRight = function() {
-      this.player.moveRight();
-    }.bind(this);
-    $_.getEvent('KeyPressedRight', this.PlayerMoveRight);
   }
 
   update() {

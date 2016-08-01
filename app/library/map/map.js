@@ -6,24 +6,39 @@
 class WorldMap {
   constructor() {
     this.map = [];
-    this.generate();
-    this.draw();
+    // this.generate();
+    // this.draw();
+    socket.on('Map:New:WorldMap', function(data) {
+      this.width = data.x;
+      this.height = data.y;
+      this.tile = {x: data.tiles.x, y: data.tiles.y};
+      this.tiles = data.tiles;
+      this.generate();
+      this.draw();
+      $_.sendEvent('MapReady');
+    }.bind(this));
   }
   generate() {
         // Generate a map full of grass
-        for(let x = 0; x < $_.maxDimension.getX(); x+=32){
-          this.map[x] = [];
-          for(let y = 0; y < $_.maxDimension.getY(); y+=32){
-            this.map[x][y] = new GrassTile(x,y);
+        for (var x in this.tiles) {
+          if (x.indexOf('tile') == 0 )
+          {
+            var tile = this.tiles[x];
+            var _x = tile.x;
+            var _y = tile.y;
+            var _z = tile.z;
+            if (this.map[_z] === undefined) this.map[_z] =[];
+            this.map[_z][x] = new GrassTile(_x,_y,this.tile.x, this.tile.y);
           }
         }
   }
   draw() {
     // Draw all the things!
-    for(let x = 0; x < $_.maxDimension.getX(); x+=32){
-      for(let y = 0; y < $_.maxDimension.getY(); y+=32){
-        this.map[x][y].draw();
+    for (let z in this.map) {
+      for (let x in this.map[z]) {
+        this.map[z][x].draw();
       }
     }
   }
+
 }

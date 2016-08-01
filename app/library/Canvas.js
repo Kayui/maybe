@@ -41,15 +41,14 @@ class Canvas {
 
   create() {
     // Appending escape handling to the input object
-    input.escape = $_.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
+    $_.input = new InputHandler();
   }
 
   update() {
-    inputHandler();
+    $_.input.update();
   }
 
   render() {
     // CALL SOMETHING ELSE
   }
 }
-

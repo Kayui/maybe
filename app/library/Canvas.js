@@ -28,12 +28,39 @@ class Canvas {
     this.game.scale.updateLayout();
   }
 
+  // Event handlers
+  sendEvent (name, option) {
+
+    if (option == undefined) {
+  		option = {};
+  	}
+    // START: DEBUG!
+    console.log("Sending message: "+name+ " with option " + JSON.stringify(option));
+    // END: DEBUG
+
+  	let event = new CustomEvent(name, option);
+  	document.dispatchEvent(event);
+  }
+
+  getEvent(name, funct) {
+  	return document.addEventListener(name,
+  	funct, false);
+  }
+
+  removeEvent(name, funct) {
+  	return document.removeEventListener(name, funct, false);
+  }
+
+
   preload() {
     window.addEventListener('resize', function () {
       $_.game.renderer.resize(100, 100);
       $_.getResolution();
       $_.setResolution();
     });
+    $_.game.stage.backgroundColor = "#333333";
+
+
     $_.getResolution();
     $_.setResolution();
 
@@ -41,7 +68,10 @@ class Canvas {
 
   create() {
     // Appending escape handling to the input object
+    $_.keys = new Keys();
     $_.input = new InputHandler();
+    $_.map = new WorldMap();
+    $_.menu = new Menu();
   }
 
   update() {

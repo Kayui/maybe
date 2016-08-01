@@ -15,9 +15,12 @@ class WorldMap {
       this.tiles = data.tiles;
       this.neededTiles = data.tilesconfig;
       console.log(this.neededTiles);
+      
       for (let i in this.neededTiles) {
-        $_.game.load.image('grass', '/assets/grass.png');
+        $_.game.load.image(i, 'assets/' + i + '.png');
       }
+      $_.game.load.start();
+      
       this.generate();
       this.draw();
       $_.sendEvent('MapReady');

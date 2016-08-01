@@ -2,8 +2,8 @@
 module.exports = {
   Generator: class MapGenerator {
     constructor() {
-      this.width = 2;
-      this.height = 2;
+      this.width = 60;
+      this.height = 45;
       var _tiles =  require('./tiles')
       this.tiles = new _tiles.List();
 

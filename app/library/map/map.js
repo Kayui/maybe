@@ -13,6 +13,15 @@ class WorldMap {
       this.height = data.y;
       this.tile = {x: data.tiles.x, y: data.tiles.y};
       this.tiles = data.tiles;
+      this.neededTiles = {};
+      for (let x in this.tiles) {
+        var type = this.tiles[x].type;
+        if (type !== undefined && this.neededTiles[type] === undefined) {
+          this.neededTiles[type] = "getTile";
+          socket.emit('Tile:Get', {tile: type});
+        }
+      }
+      console.log(this.neededTiles);
       this.generate();
       this.draw();
       $_.sendEvent('MapReady');

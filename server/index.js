@@ -3,6 +3,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var game = require('./Game/Game');
+var tiles = new game.tiles.List();
 
 /*app.get('/', function(req, res){
     gameFS.sendFile(req, res);

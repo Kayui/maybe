@@ -13,9 +13,7 @@ class Tile {
   }
 
   draw() {
-    this.tile = $_.game.add.graphics();
-    this.tile.beginFill(this._getColor());
-    this.tile.drawRect(this.x * this.tilex, this.y*this.tiley, 32, 32);
+    this.tile = $_.game.add.sprite(this.x * this.tilex, this.y * this.tiley, this._getTexture());
   }
 
   getName() {
@@ -32,6 +30,10 @@ class GrassTile extends Tile {
     // Cozy green yo
     return 0x5D7E62;
   }
+
+  _getTexture() {
+    return "grass";
+  }
 }
 
 class DirtTile extends Tile {
@@ -42,5 +44,9 @@ class DirtTile extends Tile {
   _getColor() {
     // Cozy brown yo
     return 0xA68C69;
+  }
+
+  _getTexture() {
+    return "dirt";
   }
 }

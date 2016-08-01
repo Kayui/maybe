@@ -63,6 +63,8 @@ class Canvas {
     $_.getResolution();
     $_.setResolution();
 
+    $_.game.load.image('grass', 'assets/grass.png');
+    $_.game.load.image('dirt', 'assets/dirt.png');
   }
 
   create() {

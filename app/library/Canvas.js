@@ -66,34 +66,37 @@ class Canvas {
   }
 
   create() {
-    // Appending escape handling to the input object
     $_.input = new InputHandler();
     $_.map = new WorldMap();
     $_.menu = new Menu();
     this.game.world.setBounds(0, 0, 1920, 1440);
-    player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'nothing really');
-    this.game.camera.follow(player);
+    this.player = new Player(200, 200, "nothing really");
+
     this.PlayerMoveUp = function() {
-      alert("vei");
+      this.player.moveUp();
+      console.log(this.player.y);
     }.bind(this);
     $_.getEvent('KeyPressedUp', this.PlayerMoveUp);
+
+    this.PlayerMoveDown = function() {
+      this.player.moveDown();
+    }.bind(this);
+    $_.getEvent('KeyPressedDown', this.PlayerMoveDown);
+
+    this.PlayerMoveLeft = function() {
+      this.player.moveLeft();
+    }.bind(this);
+    $_.getEvent('KeyPressedLeft', this.PlayerMoveLeft);
+
+    this.PlayerMoveRight = function() {
+      this.player.moveRight();
+    }.bind(this);
+    $_.getEvent('KeyPressedRight', this.PlayerMoveRight);
   }
 
   update() {
     $_.input.update();
-
-
-    /*
-
-      IF we get event KeyPressedDown we want to move player down
-
-    */
-
-
-
   }
 
-  render() {
-    // CALL SOMETHING ELSE
-  }
+  render() {}
 }

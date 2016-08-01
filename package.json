@@ -1,15 +1,17 @@
 {
-"scripts": {
+  "scripts": {
     "start": "nw --remote-debugging-port=9999"
   },
-"name": "cultmaybe",
-"main": "app/index.html",
-"window": { 
-    "toolbar": true,  
-     "fullscreen": true
- },
-    "dependencies" : {
-        "nw" : "latest",
-        "phaser" : "2.6.1"
-    }
+  "name": "cultmaybe",
+  "main": "localhost:3000",
+  "window": {
+    "toolbar": true,
+    "fullscreen": true
+  },
+  "dependencies": {
+    "express": "^4.10.2",
+    "nw": "latest",
+    "phaser": "2.6.1",
+    "socket.io": "^1.4.8"
+  }
 }

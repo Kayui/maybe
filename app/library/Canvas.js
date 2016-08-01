@@ -70,10 +70,23 @@ class Canvas {
     $_.input = new InputHandler();
     $_.map = new WorldMap();
     $_.menu = new Menu();
+    this.game.world.setBounds(0, 0, 1920, 1440);
+    player = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'nothing really');
+    this.game.camera.follow(player);
   }
 
   update() {
     $_.input.update();
+
+
+    /*
+
+      IF we get event KeyPressedDown we want to move player down
+
+    */
+
+
+
   }
 
   render() {

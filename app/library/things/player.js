@@ -34,7 +34,6 @@ class Player {
   keyReady() {
     this.PlayerMoveUp = function() {
       this.moveUp();
-      console.log(this.y);
     }.bind(this);
     $_.getEvent('KeyPressedUp', this.PlayerMoveUp);
 
@@ -65,7 +64,6 @@ class Player {
   }
 
   moveUp() {
-    console.log("asdasd");
     this.sprite.y -= 5;
     this.y -= 5;
   }

@@ -35,7 +35,7 @@ class Canvas {
   		option = {};
   	}
     // START: DEBUG!
-    console.log("Sending message: "+name+ " with option " + JSON.stringify(option));
+    // console.log("Sending message: "+name+ " with option " + JSON.stringify(option));
     // END: DEBUG
 
   	let event = new CustomEvent(name, option);
@@ -76,6 +76,7 @@ class Canvas {
 
   update() {
     $_.input.update();
+    
   }
 
   render() {}

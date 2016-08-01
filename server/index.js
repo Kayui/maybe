@@ -13,6 +13,7 @@ app.use(function(req, res){
 
 io.on('connection', function(socket){
   console.log('a user connected');
+  socket.emit('Map:New:WorldMap', new game.map.Generator());
 });
 
 http.listen(3000, function(){

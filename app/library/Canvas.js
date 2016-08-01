@@ -2,16 +2,21 @@
 class Canvas {
   constructor() {
     this.game = new Phaser.Game("100", "100", Phaser.AUTO, 'gg',
-    { preload: this.preload,
-      create: this.create,
-      update: this.update,
-      render: this.render });
+      {
+        preload: this.preload,
+        create: this.create,
+        update: this.update,
+        render: this.render
+      });
+      this.input = new Object();
   }
+
   getResolution() {
     /* TODO: MUCH LATER TODO
     create a function that decides on which resolution to scale to */
-    this.maxDimension = new Dimension(640,480);
+    this.maxDimension = new Dimension(640, 480);
   }
+
   setResolution() {
     this.game.scale.maxWidth = this.maxDimension.getX();
     this.game.scale.maxHeight = this.maxDimension.getY();
@@ -24,7 +29,7 @@ class Canvas {
   }
 
   preload() {
-    window.addEventListener('resize', function() {
+    window.addEventListener('resize', function () {
       $_.game.renderer.resize(100, 100);
       $_.getResolution();
       $_.setResolution();
@@ -35,18 +40,16 @@ class Canvas {
   }
 
   create() {
-    // CALL SOMETHING ELSE
+    // Appending escape handling to the input object
+    input.escape = $_.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
   }
 
   update() {
-    // CALL SOMETHING ELSE
+    inputHandler();
   }
 
   render() {
     // CALL SOMETHING ELSE
   }
-
-
 }
 
-let $_ = new Canvas();

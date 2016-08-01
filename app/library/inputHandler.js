@@ -4,10 +4,12 @@ function Keys() {
 	this.escape = $_.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
 }
 
-
 // Input handler
 class InputHandler {
+	constructor() {
+		this.keys = new Keys();
+	}
 	update() {
-		if ($_.keys.escape.isDown) $_.sendEvent('KeyPressedEscape');
+		if (this.keys.escape.isDown) $_.sendEvent('KeyPressedEscape');
 	}
 }

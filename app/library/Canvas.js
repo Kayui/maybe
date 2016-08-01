@@ -68,7 +68,6 @@ class Canvas {
 
   create() {
     // Appending escape handling to the input object
-    $_.keys = new Keys();
     $_.input = new InputHandler();
     $_.map = new WorldMap();
     $_.menu = new Menu();

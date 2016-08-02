@@ -16,9 +16,12 @@ class WorldMap {
       this.neededTiles = data.tilesconfig;
       console.log(this.neededTiles);
       
+      // Þetta preppar loading
       for (let i in this.neededTiles) {
         $_.game.load.image(i, 'assets/' + i + '.png');
       }
+
+      // Þessi lína sparkar öllu í gang
       $_.game.load.start();
       
       this.generate();

@@ -41,6 +41,11 @@ class Tile {
     this.hasBeenDrawn = true;
   }
 
+  drawMiniMap() {
+
+  }
+
+
   getName() {
     return this.name;
   }

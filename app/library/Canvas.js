@@ -73,12 +73,11 @@ class Canvas {
       setTimeout(function(){
         this.watchObject(obj, func, param, changeInto);
       }.bind(this), 3000);
-    }
+    }.bind(this);
 
     if (changeInto === true & obj === param) {
       changeHappend();
       if (recursive) callBack();
-      console.log("change happend");
     }
 
     else if (changeInto === false & obj !== param) {
@@ -102,7 +101,7 @@ class Canvas {
 
     $_.getResolution();
     $_.setResolution();
-  
+
   }
 
   create() {

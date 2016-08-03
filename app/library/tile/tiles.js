@@ -40,6 +40,9 @@ class Tile {
     this.tile = $_.game.add.sprite(this.x * this.tilex, this.y * this.tiley, this.name);
     this.hasBeenDrawn = true;
   }
+  remove() {
+    this.tile.destroy();
+  }
 
   drawMiniMap() {
 

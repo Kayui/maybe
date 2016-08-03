@@ -9,6 +9,7 @@ class WorldMap {
     // this.generate();
     // this.draw();
     socket.on('Map:New:WorldMap', function(data) {
+      this.cleanmap();
       this.width = data.x;
       this.height = data.y;
       this.tile = {x: data.tiles.x, y: data.tiles.y};
@@ -33,6 +34,16 @@ class WorldMap {
       }.bind(this), {param: true});
     }.bind(this));
   }
+  cleanmap() {
+    // Removing old elements
+    for (let z in this.map) {
+      for (let x in this.map[z]) {
+        if (!(x === 'x' || x === 'y' || x === undefined)) {
+            this.map[z][x].remove();
+        }
+      }
+    }
+}
   generate() {
         // Generate a map full of grass
         for (var x in this.tiles) {

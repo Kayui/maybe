@@ -57,8 +57,9 @@ module.exports = {
     constructor() {
       this.width = 30;
       this.height = 30;
+      this.tilesWidth = 32;
+      this.tilesHeight = 32;
 
-      
       this.houses = 2;
       var _tiles = require('./tiles')
       this.tiles = new _tiles.List();
@@ -126,9 +127,9 @@ module.exports = {
 
     tilesObject() {
       var obj = {};
-      obj.x = this.width;
-      obj.y = this.height;
-      
+      obj.x = this.tilesWidth;
+      obj.y = this.tilesHeight;
+
       for(let houses = 0; houses < this.houses; houses++){
         let x = this.getValidHousePos();
         let y = this.getValidHousePos();

@@ -4,8 +4,8 @@ class Minimap {
     constructor() {
         this.x = 10;
         this.y = 10;
-        this.width = $_.map.width;
-        this.height = $_.map.height;
+        this.width = ($_.map.width * $_.map.tile.x) / 10;
+        this.height = ($_.map.height * $_.map.tile.y) / 10;
         this.drawEv = this.draw.bind(this);
         $_.getEvent('SpritesReady', this.drawEv);
         // this.draw();

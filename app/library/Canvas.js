@@ -35,16 +35,16 @@ class Canvas {
   		option = {};
   	}
     // START: DEBUG!
-    // console.log("Sending message: "+name+ " with option " + JSON.stringify(option));
+    console.log("Sending message: "+name+ " with option " + JSON.stringify(option));
     // END: DEBUG
-
-  	let event = new CustomEvent(name, option);
+    let event = document.createEvent('HTMLEvents')
+    event.initEvent(name, true, true);
+    event.option = option;
   	document.dispatchEvent(event);
   }
 
   getEvent(name, funct) {
-  	return document.addEventListener(name,
-  	funct, false);
+  	return document.addEventListener(name, funct , false);
   }
 
   removeEvent(name, funct) {
@@ -102,7 +102,7 @@ class Canvas {
 
     $_.getResolution();
     $_.setResolution();
-
+  
   }
 
   create() {

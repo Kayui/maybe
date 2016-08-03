@@ -51,17 +51,19 @@
   Result: two points of interest which can be freely moved between with randomly generated terrain
 */
 
-
+var clc = require('cli-color');
 module.exports = {
   Generator: class MapGenerator {
     constructor() {
-      this.width = 60;
-      this.height = 45;
-      var _tiles =  require('./tiles')
+      this.width = 30;
+      this.height = 30;
+      this.houses = 2;
+      var _tiles = require('./tiles')
       this.tiles = new _tiles.List();
 
       return this.mapObject();
     }
+
     mapObject() {
       var obj = {};
       obj.x = this.width;
@@ -74,9 +76,28 @@ module.exports = {
           obj.tilesconfig[type] = this.tiles.GetTile(type);
         }
       }
-      console.log(obj);
+      this.prettyPrint(obj);
       return obj;
     }
+
+    prettyPrint(map) {
+      for (let x = 0; x < this.width; x++) {
+        let line = "";
+        for (let y = 0; y < this.height; y++) {
+          if (map.tiles['tile' + y + 'x' + x].type === "grass") {
+            line += clc.green("[g]");
+          }
+          else if (map.tiles['tile' + y + 'x' + x].type === "dirt") {
+            line += clc.red.bgWhite.underline("[d]");
+          }
+          else if (map.tiles['tile' + y + 'x' + x].type === "house") {
+            line += clc.blue.bgWhite("[h]");
+          }
+        }
+        console.log(line);
+      }
+    }
+
     tileObject(x, y) {
       var obj = {};
       obj.type = this.tiles.GetRandomTile();
@@ -86,17 +107,58 @@ module.exports = {
       obj.layer = {};
       return obj;
     }
+
+    houseObject(x, y) {
+      var obj = {};
+      obj.type = 'house';
+      obj.x = x;
+      obj.y = y;
+      obj.z = 0;
+      obj.layer = {};
+      return obj;
+    }
+
+    getValidHousePos() {
+      return Math.floor(Math.random() * ((this.width-2) - 0 + 1)) + 0;
+    }
+
     tilesObject() {
       var obj = {};
-      // TODO: Explain to me why you are hardcoding! :) (passive aggresive smiley)
+      obj.x = this.width;
+      obj.y = this.height;
+      
+      for(let houses = 0; houses < this.houses; houses++){
+        let x = this.getValidHousePos();
+        let y = this.getValidHousePos();
+        obj['tile' + x + 'x' + y] = this.houseObject(x, y);
+        obj['tile' + (x + 1) + 'x' + y] = this.houseObject((x + 1), y)
+        obj['tile' + (x + 1) + 'x' + (y + 1)] = this.houseObject((x + 1), (y + 1))
+        obj['tile' + x + 'x' + (y + 1)] = this.houseObject(x, (y + 1))
+      }
+
+      for (let x = 0; x < this.width; x++) {
+        for (let y = 0; y < this.height; y++) {
+          if (!obj['tile' + x + 'x' + y]) {
+            obj['tile' + x + 'x' + y] = this.tileObject(x, y);
+          }
+        }
+      }
+      return obj;
+    }
+
+    tilesObjectOld() {
+      var obj = {};
+      // TODO: Explain to me why you are hardcoding! :) (passive aggressive smiley)
       obj.x = 32;
       obj.y = 32;
       for (var x = 0; x < this.width; x++) {
         for (var y = 0; y < this.height; y++) {
-              obj['tile'+x+'x'+y] = this.tileObject(x,y);
-            }
+          if (!obj['tile' + x + 'x' + y]) {
+            obj['tile' + x + 'x' + y] = this.tileObject(x, y);
+          }
+        }
       }
       return obj;
-  }
+    }
   }
 };

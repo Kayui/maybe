@@ -12,6 +12,7 @@
     "express": "^4.10.2",
     "nw": "latest",
     "phaser": "2.6.1",
-    "socket.io": "^1.4.8"
+    "socket.io": "^1.4.8",
+    "cli-color": "latest"
   }
 }

@@ -9,22 +9,28 @@ module.exports = {
       this.tiles = {};
       this.tilesName = [];
       for (var i in files) {
-        var obj = JSON.parse(this.fs.readFileSync(this.configPath+files[i], 'utf8'));
-        this.tiles[files[i].replace('.json','')] = obj;
-        this.tilesName.push(files[i].replace('.json',''));
+
+        var obj = JSON.parse(this.fs.readFileSync(this.configPath + files[i], 'utf8'));
+        this.tiles[files[i].replace('.json', '')] = obj;
+        // ANDRI: Smá skítmix, fix later!
+        if(files[i] != 'house.json'){
+          this.tilesName.push(files[i].replace('.json', ''));
+        }
       }
-      console.log(this.GetRandomTile());
-  }
-  GetRandomTile() {
-    return this.tilesName[Math.floor(Math.random() * this.tilesName.length)];
-  }
-  GetTile(name) {
-    if(this.tiles[name] == undefined) {
-      return;
+      //console.log(this.GetRandomTile());
     }
-    var obj = this.tiles[name];
-    obj.img = this.imgPath+""+obj.img;
-    return obj;
-  }
+
+    GetRandomTile() {
+      return this.tilesName[Math.floor(Math.random() * this.tilesName.length)];
+    }
+    
+    GetTile(name) {
+      if (this.tiles[name] == undefined) {
+        return;
+      }
+      var obj = this.tiles[name];
+      obj.img = this.imgPath + "" + obj.img;
+      return obj;
+    }
   }
 }

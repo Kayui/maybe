@@ -19,11 +19,15 @@ class Tile {
     this.hasBeenDrawn = false;
     this.initSelect();
   }
+
   select(e) {
-    var x = Math.floor((e.option.x / this.tilex)),
-        y = Math.floor((e.option.y / this.tiley));
+    let x_adjusted = e.option.x + $_.game.camera.x;
+    let y_adjusted = e.option.y + $_.game.camera.y;
+    let x = Math.floor((x_adjusted / this.tilex)),
+      y = Math.floor((y_adjusted / this.tiley));
     if (this.x == x && this.y == y) {
-      console.log("picked");
+      //      console.log("picked");
+      console.log("You just clicked a " + this.getName() + " tile");
     }
   }
 
@@ -32,13 +36,12 @@ class Tile {
     $_.getEvent('MouseLeftDown', this.selectEv);
   }
 
-
   draw() {
     this.tile = $_.game.add.sprite(this.x * this.tilex, this.y * this.tiley, this.name);
     this.hasBeenDrawn = true;
   }
 
   getName() {
-    return tileobj.Name;
+    return this.name;
   }
 }

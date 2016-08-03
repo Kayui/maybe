@@ -14,20 +14,6 @@
 
 <body>
 
-  <script>
-  var canvas = document.createElement('canvas');
-  canvas.style.position = "absolute";
-  canvas.style.right = 0;
-  canvas.style.bottom = 0;
-  canvas.style.marginBottom = "20px";
-  canvas.style.marginTop = "20px";
-  canvas.style.width = "200px";
-  canvas.style.height = "200px";
-  document.body.appendChild(canvas);
-  var ctx = canvas.getContext("2d");
-  ctx.fillStyle = "blue";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-</script>
   <!-- Should always be loaded first !-->
   <script src="/socket.io/socket.io.js"></script>
   <script src='../node_modules/phaser/build/phaser.js'></script>
@@ -57,11 +43,11 @@
       console.log("hey");
       var x = ev.layerX;
       var y = ev.layerY;
-      console.log(ev);
       var cameraPosY = (y / 200) * ($_.map.height * $_.map.tile.y);
-      console.log(cameraPosY);
-      $_.game.camera.y = (y / 200) * ($_.map.height * $_.map.tile.y);
-      $_.game.camera.x = (x / 200) * ($_.map.width * $_.map.tile.x);
+      
+      $_.game.camera.y = (y / 200) * ($_.map.height * $_.map.tile.y) - ($_.game.camera.height / 2);
+      $_.game.camera.x = (x / 200) * ($_.map.width * $_.map.tile.x) - ($_.game.camera.width / 2);
+
     }
     var el = document.getElementById('minimap');
     el.addEventListener('click', minihax);

@@ -117,8 +117,10 @@ class Canvas {
   }
 
   update() {
+    if($_.minimap !== undefined){
+      $_.minimap.update();
+    }
     $_.input.update();
-
   }
 
   render() {}

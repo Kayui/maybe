@@ -63,11 +63,13 @@ module.exports = {
       this.houses = 2;
       var _tiles = require('./tiles')
       this.tiles = new _tiles.List();
-
-      return this.mapObject();
+      let mapObject = this.mapObject();
+      console.log("Handing Finished Map Object Over To The Client");
+      return mapObject;
     }
 
     mapObject() {
+      console.log("Generating Map Object");
       var obj = {};
       obj.x = this.width;
       obj.y = this.height;
@@ -130,6 +132,7 @@ module.exports = {
       obj.x = this.tilesWidth;
       obj.y = this.tilesHeight;
 
+      console.log("Generating Houses");
       for(let houses = 0; houses < this.houses; houses++){
         let x = this.getValidHousePos();
         let y = this.getValidHousePos();
@@ -139,6 +142,7 @@ module.exports = {
         obj['tile' + x + 'x' + (y + 1)] = this.houseObject(x, (y + 1))
       }
 
+    console.log("Generating Terrain");
       for (let x = 0; x < this.width; x++) {
         for (let y = 0; y < this.height; y++) {
           if (!obj['tile' + x + 'x' + y]) {
@@ -146,6 +150,7 @@ module.exports = {
           }
         }
       }
+
       return obj;
     }
 

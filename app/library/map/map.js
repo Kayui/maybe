@@ -50,6 +50,7 @@ class WorldMap {
   }
   draw() {
     // Draw all the things!
+    $_.game.world.removeAll();
     for (let z in this.map) {
       for (let x in this.map[z]) {
         this.map[z][x].draw();

@@ -14,8 +14,7 @@ class WorldMap {
       this.tile = {x: data.tiles.x, y: data.tiles.y};
       this.tiles = data.tiles;
       this.neededTiles = data.tilesconfig;
-      console.log(this.neededTiles);
-      
+
       // Þetta preppar loading
       for (let i in this.neededTiles) {
         $_.game.load.image(i, 'assets/' + i + '.png');
@@ -23,16 +22,19 @@ class WorldMap {
 
       // Þessi lína sparkar öllu í gang
       $_.game.load.start();
-      
-      this.generate();
-      this.draw();
-      $_.sendEvent('MapReady');
+
+      // Wait for game to load and the draw the game      
+      $_.watchObject($_.game.load.hasLoaded, function(){
+        this.generate();
+        this.draw();
+        $_.sendEvent('MapReady');
+      }.bind(this), {param: true});
     }.bind(this));
   }
   generate() {
         // Generate a map full of grass
         for (var x in this.tiles) {
-          if (x.indexOf('tile') == 0 )
+          if (x.indexOf('tile') === 0 )
           {
             var tile = this.tiles[x];
             var _x = tile.x;
@@ -48,7 +50,6 @@ class WorldMap {
     // Draw all the things!
     for (let z in this.map) {
       for (let x in this.map[z]) {
-        console.log("hello");
         this.map[z][x].draw();
       }
     }

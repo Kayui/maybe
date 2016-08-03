@@ -51,6 +51,46 @@ class Canvas {
   	return document.removeEventListener(name, funct, false);
   }
 
+  watchObject(obj, func, options)
+  {
+    var param = options.param === undefined ? undefined : options.param;
+    var changeInto = options.changeInto === undefined ? undefined : options.changeInto;
+    var recursive = options.recursive === undefined ? false : options.recurisve;
+
+    if (param === undefined & changeInto === undefined) {
+      changeInto = false;
+    } else {
+      changeInto = changeInto === undefined ? true : changeInto;
+    }
+    if (param === undefined) {
+      var param = obj;
+    }
+
+    var changeHappend = function() {
+      func();
+    };
+    var callBack = function() {
+      setTimeout(function(){
+        this.watchObject(obj, func, param, changeInto);
+      }.bind(this), 3000);
+    }
+
+    if (changeInto === true & obj === param) {
+      changeHappend();
+      if (recursive) callBack();
+      console.log("change happend");
+    }
+
+    else if (changeInto === false & obj !== param) {
+      changeHappend();
+      if (recursive) callBack();
+    }
+    else {
+      callBack();
+    }
+
+  }
+
 
   preload() {
     window.addEventListener('resize', function () {
@@ -71,7 +111,7 @@ class Canvas {
     $_.menu = new Menu();
     this.game.world.setBounds(0, 0, 1920, 1440);
     this.player = new Player(200, 200, "nothing really");
-    
+
   }
 
   update() {

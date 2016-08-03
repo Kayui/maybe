@@ -12,11 +12,9 @@ class Tile {
     this.tiley = tiley;
     this.tileobj = tileobj;
     this.name = name;
-    console.log("Nýtt tile");
   }
 
   draw() {
-    console.log("TEIKNA ok nafn er:"+this.name+":");
     this.tile = $_.game.add.sprite(this.x * this.tilex, this.y * this.tiley, this.name);
   }
 

@@ -1,5 +1,6 @@
 {
   "name": "Dirt",
   "img":  "dirt.png",
-  "canbePasssed": true
+  "canbePasssed": true,
+  "colorTag": "6"
 }

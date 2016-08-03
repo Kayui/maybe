@@ -1,5 +1,6 @@
 {
   "name": "House",
   "img":  "house.png",
-  "canbePasssed": true
+  "canbePasssed": true,
+  "colorTag": "5"
 }

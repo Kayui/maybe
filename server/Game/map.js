@@ -57,6 +57,8 @@ module.exports = {
     constructor() {
       this.width = 30;
       this.height = 30;
+
+      
       this.houses = 2;
       var _tiles = require('./tiles')
       this.tiles = new _tiles.List();

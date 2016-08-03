@@ -35,19 +35,8 @@ class WorldMap {
     }.bind(this));
   }
   cleanmap() {
-    // Removing old elements
-    var canvas = document.getElementsByTagName("canvas")[0];
-    var gl = canvas.getContext('experimental-webgl');
-    gl.clearColor(1.0, 1.0, 0.0, 1.0);
-    return;
-    for (let z in this.map) {
-      for (let x in this.map[z]) {
-        if (!(x === 'x' || x === 'y' || x === undefined)) {
-            this.map[z][x].remove();
-        }
-      }
-    }
-}
+    $_.clear();
+  }
   generate() {
         // Generate a map full of grass
         for (var x in this.tiles) {

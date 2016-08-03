@@ -94,6 +94,9 @@ class Canvas {
 
   }
 
+  clear() {
+    $_.game.world.removeAll()
+  }
 
   preload() {
     window.addEventListener('resize', function () {

@@ -22,6 +22,8 @@ class WorldMap {
         this.tiles = data.tiles;
         this.neededTiles = data.tilesconfig;
 
+        $_.game.world.setBounds(0, 0, $_.map.width*$_.map.tile.x, $_.map.height*$_.map.tile.y);
+    
         $_.minimap = new Minimap();
 
         // Þetta preppar loading

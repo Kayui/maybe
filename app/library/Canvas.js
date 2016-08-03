@@ -62,6 +62,7 @@ class Canvas {
       buffer = buffer[objname.split(".")[x]];
     }
     var obj = buffer;
+    console.log("object is "+obj);
     if (param === undefined & changeInto === undefined) {
       changeInto = false;
     } else {
@@ -121,7 +122,6 @@ class Canvas {
     $_.input = new InputHandler();
     $_.map = new WorldMap();
     $_.menu = new Menu();
-    this.game.world.setBounds(0, 0, 1920, 1440);
     this.player = new Player(200, 200, "player");
   }
 

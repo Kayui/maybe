@@ -27,30 +27,35 @@ class Player {
 
   draw(){
     this.sprite = $_.game.add.sprite(this.x, this.y, this.texture);
-    $_.game.camera.follow(this.sprite);
+    //$_.game.camera.follow(this.sprite);
     this.sprite.anchor.setTo(0.5, 0.5);
     // TODO: This should really not be handled by the player class
     $_.sendEvent('SpritesReady');
   }
 
+  // SMÁ HAX SORrÍ ExxKI! Drepa Mjig!
   keyReady() {
     this.PlayerMoveUp = function() {
-      this.moveUp();
+      $_.game.camera.y -= 5;
+      //this.moveUp();
     }.bind(this);
     $_.getEvent('KeyPressedUp', this.PlayerMoveUp);
 
     this.PlayerMoveDown = function() {
-      this.moveDown();
+      $_.game.camera.y += 5;
+      //this.moveDown();
     }.bind(this);
     $_.getEvent('KeyPressedDown', this.PlayerMoveDown);
 
     this.PlayerMoveLeft = function() {
-      this.moveLeft();
+      $_.game.camera.x -= 5;
+      //this.moveLeft();
     }.bind(this);
     $_.getEvent('KeyPressedLeft', this.PlayerMoveLeft);
 
     this.PlayerMoveRight = function() {
-      this.moveRight();
+      $_.game.camera.x += 5;
+      //this.moveRight();
     }.bind(this);
     $_.getEvent('KeyPressedRight', this.PlayerMoveRight);
   }

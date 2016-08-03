@@ -55,8 +55,8 @@ var clc = require('cli-color');
 module.exports = {
   Generator: class MapGenerator {
     constructor() {
-      this.width = 30;
-      this.height = 30;
+      this.width = 90;
+      this.height = 90;
       this.tilesWidth = 32;
       this.tilesHeight = 32;
 

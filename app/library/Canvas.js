@@ -53,6 +53,7 @@ class Canvas {
   /* TODO: Fix watchobject so it watches other objects than game.load.hasLoaded :) */
   watchObject(objname, func, options)
   {
+    console.log("Watch object");
     var param = options.param === undefined ? undefined : options.param;
     var changeInto = options.changeInto === undefined ? undefined : options.changeInto;
     var recursive = options.recursive === undefined ? false : options.recurisve;

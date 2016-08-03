@@ -9,6 +9,7 @@ class WorldMap {
     // this.generate();
     // this.draw();
     console.log("Request map");
+    $_.sendEvent('ClientReady');
     socket.on('connect',function(){
       console.log("Sendi request");
       socket.emit('Map:Get:WorldMap', {data: 'hey' });

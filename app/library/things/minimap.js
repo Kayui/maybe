@@ -2,8 +2,8 @@
 
 class Minimap {
     constructor() {
-        this.offsetX = 50;
-        this.offsetY = 50;
+        this.offsetX = 200;
+        this.offsetY = 200;
         this.width = ($_.map.width * $_.map.tile.x) / 10;
         this.height = ($_.map.height * $_.map.tile.y) / 10;
         this.drawEv = this.draw.bind(this);
@@ -15,13 +15,34 @@ class Minimap {
     }
 
     draw() {
-        this.minimap = $_.game.add.graphics();
-        this.minimap.beginFill(0xffffff);
-        console.log($_.game.camera);
-        this.minimap.drawRect(0, 0, this.width, this.height);
-        console.log(this.minimap);
-        this.minimap.endFill();
-        window.graphics = this.minimap;
+        // colors:
+        // http://phaser.io/examples/v2/create/gen-paint
+        var dudeData = [
+            'DDDDDDDDDDDDDDDDDDDD',
+            'D..................D',
+            'D..................D',
+            'D..................D',
+            'D..................D',
+            'D..................D',
+            'D..................D',
+            'D..................D',
+            'D..................D',
+            'D..................D',
+            'D..................D',
+            'D..................D',
+            'D..................D',
+            'D..................D',
+            'D..................D',
+            'D..................D',
+            'D..................D',
+            'D..................D',
+            'DDDDDDDDDDDDDDDDDDDD'
+        ];
+
+        $_.game.create.texture('phaserDude', dudeData, 8, 8, 0);
+        this.minimap = $_.game.add.sprite($_.game.camera.width - this.offsetX, $_.game.camera.height - this.offsetY, 'phaserDude');
+        this.minimap.fixedToCamera = true;
+
         // draw rectangle bounds of map and camera.
         // find with and height of world.
         // find with and height of camera.
@@ -46,6 +67,7 @@ class Minimap {
     }
 
     update() {
+        return;
         if(this.minimap !== undefined){
             this.minimap.x = $_.game.camera.x + $_.game.camera.width - this.width - this.offsetX;
             this.minimap.y = $_.game.camera.y + $_.game.camera.height - this.height - this.offsetY;

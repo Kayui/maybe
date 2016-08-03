@@ -108,7 +108,7 @@ class Canvas {
 
     $_.getResolution();
     $_.setResolution();
-
+    $_.game.load.image('player', 'assets/player.png');
   }
 
   create() {
@@ -116,7 +116,7 @@ class Canvas {
     $_.map = new WorldMap();
     $_.menu = new Menu();
     this.game.world.setBounds(0, 0, 1920, 1440);
-    this.player = new Player(200, 200, "nothing really");
+    this.player = new Player(200, 200, "player");
   }
 
   update() {

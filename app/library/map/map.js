@@ -11,6 +11,7 @@ class WorldMap {
     socket.on('Map:New:WorldMap', function(data) {
       this.width = data.x;
       this.height = data.y;
+      $_.minimap = new Minimap();
       this.tile = {x: data.tiles.x, y: data.tiles.y};
       this.tiles = data.tiles;
       this.neededTiles = data.tilesconfig;
@@ -23,7 +24,7 @@ class WorldMap {
       // Þessi lína sparkar öllu í gang
       $_.game.load.start();
 
-      // Wait for game to load and the draw the game      
+      // Wait for game to load and the draw the game
       $_.watchObject($_.game.load.hasLoaded, function(){
         this.generate();
         this.draw();

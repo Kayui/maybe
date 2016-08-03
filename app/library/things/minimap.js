@@ -6,7 +6,9 @@ class Minimap {
         this.y = 10;
         this.width = $_.map.width;
         this.height = $_.map.height;
-        this.draw();
+        this.drawEv = this.draw.bind(this);
+        $_.getEvent('SpritesReady', this.drawEv);
+        // this.draw();
         // x and y represent the top left corner of the map
         // aim for bottom right corner of the screen
 
@@ -24,14 +26,14 @@ class Minimap {
         // find with and height of camera.
         // scale both down, draw two rectangles with no inner fill
 
-        /*    
+        /*
                 ______________
                 |     |      |
                 |_____|      |
                 |            |
                 |            |
                 |____________|
-                
+
         */
 
 

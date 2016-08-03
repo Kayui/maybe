@@ -15,7 +15,7 @@ class Player {
       this.y = y;
     }
     this.texture = texture;
-  
+
     this.makeReady = function() {
       this.draw();
       this.keyReady();
@@ -29,10 +29,8 @@ class Player {
     this.sprite = $_.game.add.sprite(this.x, this.y, this.texture);
     $_.game.camera.follow(this.sprite);
     this.sprite.anchor.setTo(0.5, 0.5);
-    this.sprite.inputEnabled = true;
-    this.sprite.events.onInputDown.add(function(){
-      console.log("hey there!");
-    }, this);
+    // TODO: This should really not be handled by the player class
+    $_.sendEvent('SpritesReady');
   }
 
   keyReady() {

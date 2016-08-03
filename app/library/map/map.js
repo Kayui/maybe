@@ -12,32 +12,34 @@ class WorldMap {
     socket.on('connect',function(){
       console.log("Sendi request");
       socket.emit('Map:Get:WorldMap', {data: 'hey' });
-    })
-    socket.on('Map:New:WorldMap', function(data) {
-      this.cleanmap();
-      this.width = data.x;
-      this.height = data.y;
-      this.tile = {x: data.tiles.x, y: data.tiles.y};
-      this.tiles = data.tiles;
-      this.neededTiles = data.tilesconfig;
+      socket.on('Map:New:WorldMap', function(data) {
+        console.log("Got map");
+        this.cleanmap();
+        this.width = data.x;
+        this.height = data.y;
+        this.tile = {x: data.tiles.x, y: data.tiles.y};
+        this.tiles = data.tiles;
+        this.neededTiles = data.tilesconfig;
 
-      $_.minimap = new Minimap();
+        $_.minimap = new Minimap();
 
-      // Þetta preppar loading
-      for (let i in this.neededTiles) {
-        $_.game.load.image(i, 'assets/' + i + '.png');
-      }
+        // Þetta preppar loading
+        for (let i in this.neededTiles) {
+          $_.game.load.image(i, 'assets/' + i + '.png');
+        }
 
-      // Þessi lína sparkar öllu í gang
-      $_.game.load.start();
+        // Þessi lína sparkar öllu í gang
+        $_.game.load.start();
 
-      // Wait for game to load and the draw the game
-      $_.watchObject($_.game.load.hasLoaded, function(){
-        this.generate();
-        this.draw();
-        $_.sendEvent('MapReady');
-      }.bind(this), {param: true});
+        // Wait for game to load and the draw the game
+        $_.watchObject(function(){
+          this.generate();
+          this.draw();
+          $_.sendEvent('MapReady');
+        }.bind(this), {param: true});
+      }.bind(this));
     }.bind(this));
+
   }
   cleanmap() {
     $_.clear();

@@ -81,13 +81,14 @@ module.exports = {
       var obj = {};
       obj.type = this.tiles.GetRandomTile();
       obj.x = x;
-      obj.y = Y;
+      obj.y = y;
       obj.z = 0;
       obj.layer = {};
       return obj;
     }
     tilesObject() {
       var obj = {};
+      // TODO: Explain to me why you are hardcoding! :) (passive aggresive smiley)
       obj.x = 32;
       obj.y = 32;
       for (var x = 0; x < this.width; x++) {

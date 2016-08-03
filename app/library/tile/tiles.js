@@ -45,8 +45,8 @@ class Tile {
     this.tile.destroy();
   }
 
-  drawMiniMap() {
-
+  getColorTag() {
+    return tileobj.colorTag;
   }
 
 

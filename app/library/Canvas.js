@@ -50,13 +50,17 @@ class Canvas {
   removeEvent(name, funct) {
   	return document.removeEventListener(name, funct, false);
   }
-
-  watchObject(obj, func, options)
+  /* TODO: Fix watchobject so it watches other objects than game.load.hasLoaded :) */
+  watchObject(objname, func, options)
   {
     var param = options.param === undefined ? undefined : options.param;
     var changeInto = options.changeInto === undefined ? undefined : options.changeInto;
     var recursive = options.recursive === undefined ? false : options.recurisve;
-
+    var buffer = $_;
+    for (let x in objname.split(".")) {
+      buffer = buffer[objname.split(".")[x]];
+    }
+    var obj = buffer;
     if (param === undefined & changeInto === undefined) {
       changeInto = false;
     } else {
@@ -69,27 +73,28 @@ class Canvas {
     var changeHappend = function() {
       func();
     };
-    var callBack = function(obj, param, changeInto, recursive, func) {
+    var callBack = function(objname, param, changeInto, recursive, func) {
       setTimeout(function(){
         var options = {param: param,
                         changeInto: changeInto,
                         recursive: recursive};
 
-        this.watchObject(obj, func, param, changeInto);
+        this.watchObject(objname, func, options);
       }.bind(this), 300);
     }.bind(this);
 
+
     if (changeInto === true & obj === param) {
       changeHappend();
-      if (recursive) callBack(param, changeInto, recursive, func);
+      if (recursive) callBack(objname, param, changeInto, recursive, func);
     }
 
     else if (changeInto === false & obj !== param) {
       changeHappend();
-      if (recursive) callBack(obj, param, changeInto, recursive, func);
+      if (recursive) callBack(objname, param, changeInto, recursive, func);
     }
     else {
-      callBack(obj, param, changeInto, recursive, func);
+      callBack(objname, param, changeInto, recursive, func);
     }
 
   }

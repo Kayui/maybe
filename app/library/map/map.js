@@ -36,9 +36,9 @@ class WorldMap {
   }
   cleanmap() {
     // Removing old elements
-    var canvas = document.getElementsByTagName("canvas")[0];
-    var gl = canvas.getContext('experimental-webgl');
-    gl.clearColor(1.0, 1.0, 0.0, 1.0);
+    // var canvas = document.getElementsByTagName("canvas")[0];
+    //var gl = canvas.getContext('experimental-webgl');
+    //gl.clearColor(1.0, 1.0, 0.0, 1.0);
     for (let z in this.map) {
       for (let x in this.map[z]) {
         if (!(x === 'x' || x === 'y' || x === undefined)) {

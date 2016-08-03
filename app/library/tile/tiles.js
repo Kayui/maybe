@@ -42,7 +42,7 @@ class Tile {
   }
   remove() {
     this.tile.kill();
-    this.tile.remove();
+    this.tile.destroy();
   }
 
   drawMiniMap() {

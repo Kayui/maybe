@@ -53,7 +53,6 @@ class Canvas {
 
   watchObject(obj, func, options)
   {
-    console.log("watch object");
     var param = options.param === undefined ? undefined : options.param;
     var changeInto = options.changeInto === undefined ? undefined : options.changeInto;
     var recursive = options.recursive === undefined ? false : options.recurisve;
@@ -71,7 +70,6 @@ class Canvas {
       func();
     };
     var callBack = function(obj, param, changeInto, recursive, func) {
-      console.log("calling me");
       setTimeout(function(){
         var options = {param: param,
                         changeInto: changeInto,
@@ -82,18 +80,15 @@ class Canvas {
     }.bind(this);
 
     if (changeInto === true & obj === param) {
-      console.log("fixing 1");
       changeHappend();
       if (recursive) callBack(param, changeInto, recursive, func);
     }
 
     else if (changeInto === false & obj !== param) {
-      console.log("fixing 2");
       changeHappend();
       if (recursive) callBack(obj, param, changeInto, recursive, func);
     }
     else {
-      console.log("Calling back");
       callBack(obj, param, changeInto, recursive, func);
     }
 

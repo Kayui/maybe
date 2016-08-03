@@ -41,7 +41,8 @@ class Tile {
     this.hasBeenDrawn = true;
   }
   remove() {
-    this.tile.destroy();
+    this.tile.kill();
+    this.tile.remove();
   }
 
   drawMiniMap() {

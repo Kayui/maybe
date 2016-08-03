@@ -32,7 +32,7 @@ class WorldMap {
         $_.game.load.start();
 
         // Wait for game to load and the draw the game
-        $_.watchObject(function(){
+        $_.watchObject("game.load.hasLoaded",function(){
           this.generate();
           this.draw();
           $_.sendEvent('MapReady');

@@ -21,7 +21,7 @@ module.exports = {
       var rootDir = this.path.indexOf('/node_modules') == 0 ?
                     this.nodeDir : this.appDir;
       // Check if file exists
-      console.log("getting "+this.path+" from "+rootDir);
+      // console.log("getting "+this.path+" from "+rootDir);
       if (this.fs.exists(rootDir+this.path, function(exists) {
         if(exists) {
           // If this is a directory make a recursive call and add index.html

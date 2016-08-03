@@ -8,6 +8,11 @@ class WorldMap {
     this.map = [];
     // this.generate();
     // this.draw();
+    console.log("Request map");
+    socket.on('connect',function(){
+      console.log("Sendi request");
+      socket.emit('Map:Get:WorldMap', {data: 'hey' });
+    })
     socket.on('Map:New:WorldMap', function(data) {
       this.cleanmap();
       this.width = data.x;

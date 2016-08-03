@@ -79,7 +79,7 @@ module.exports = {
           obj.tilesconfig[type] = this.tiles.GetTile(type);
         }
       }
-      this.prettyPrint(obj);
+      // this.prettyPrint(obj);
       return obj;
     }
 

@@ -35,7 +35,7 @@ class Canvas {
   		option = {};
   	}
     // START: DEBUG!
-    //console.log("Sending message: "+name+ " with option " + JSON.stringify(option));
+    console.log("Sending message: "+name+ " with option " + JSON.stringify(option));
     // END: DEBUG
     let event = document.createEvent('HTMLEvents')
     event.initEvent(name, true, true);

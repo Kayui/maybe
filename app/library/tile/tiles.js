@@ -46,7 +46,7 @@ class Tile {
   }
 
   getColorTag() {
-    return tileobj.colorTag;
+    return this.tileobj.colorTag;
   }
 
 

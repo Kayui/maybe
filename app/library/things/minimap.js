@@ -17,6 +17,13 @@ class Minimap {
     draw() {
         // colors:
         // http://phaser.io/examples/v2/create/gen-paint
+        console.log("tiles:");
+        console.log($_.map.map[0]);
+        for(let y = 0; y < $_.map.height; y++){
+            for(let x = 0; x < $_.map.width; x++){
+                //console.log($_.map.map[0]
+            }
+        }
         var dudeData = [
             'DDDDDDDDDDDDDDDDDDDD',
             'D..................D',

@@ -62,6 +62,7 @@ class WorldMap {
         return;
       }
       $_.map.tile.y = $_.map.tile.y * a;
+      $_.map.tile.x = $_.map.tile.x * a;
       for (let z in $_.map.map) {
         for (let x in $_.map.map[z]) {
           $_.map.map[z][x].tilex = $_.map.map[z][x].tilex * a;

@@ -2,6 +2,6 @@
 let socket = "";
 let $_ = new Canvas();
 var connectToServer = function() {
-  socket = io.connect('http://localhost:3000');
+  socket = io.connect();
 }
 $_.getEvent('ClientReady', connectToServer);

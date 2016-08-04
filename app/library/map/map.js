@@ -21,9 +21,11 @@ class WorldMap {
         this.tile = {x: data.tiles.x, y: data.tiles.y};
         this.tiles = data.tiles;
         this.neededTiles = data.tilesconfig;
+        document.addEventListener("mousewheel", this.wheel, false);
+        document.addEventListener("DOMMouseScroll", this.wheel, false);
 
         $_.game.world.setBounds(0, 0, $_.map.width*$_.map.tile.x, $_.map.height*$_.map.tile.y);
-    
+
         $_.minimap = new Minimap();
 
         // Þetta preppar loading
@@ -47,6 +49,29 @@ class WorldMap {
   cleanmap() {
     $_.clear();
   }
+  wheel(ev) {
+      console.log("WHEEL");
+      console.log(ev);
+    	if (ev.deltaY > 0) {
+        var a = 0.5;
+      }
+      else if(ev.deltaY < 0) {
+        var a = 2;
+      }
+      else {
+        return;
+      }
+      for (let z in $_.map.map) {
+        for (let x in $_.map.map[z]) {
+          $_.map.map[z][x].tilex = $_.map.map[z][x].tilex * a;
+          $_.map.map[z][x].tiley = $_.map.map[z][x].tiley * a;
+        }
+      }
+      $_.map.cleanmap();
+      $_.map.draw();
+  }
+
+
   generate() {
         // Generate a map full of grass
         for (var x in this.tiles) {

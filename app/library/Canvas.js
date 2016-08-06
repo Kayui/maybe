@@ -1,136 +1,104 @@
 'use strict';
 class Canvas {
-  constructor() {
-    this.game = new Phaser.Game("100", "100", Phaser.AUTO, 'gg',
-      {
-        preload: this.preload,
-        create: this.create,
-        update: this.update,
-        render: this.render
-      });
-      this.input = new Object();
-  }
+    constructor() {
+        this.renderer = PIXI.autoDetectRenderer(640, 480, {
+            antialias: false,
+            transparent: false,
+            resolution: 1
+        });
 
-  getResolution() {
-    /* TODO: MUCH LATER TODO
-    create a function that decides on which resolution to scale to */
-    this.maxDimension = new Dimension(640, 480);
-  }
+        this.setResolution();
+        let canvasContainer = document.getElementsByClassName("canvasContainer")[0];
+        let canvas = canvasContainer.appendChild(this.renderer.view);
 
-  setResolution() {
-    this.game.scale.maxWidth = this.maxDimension.getX();
-    this.game.scale.maxHeight = this.maxDimension.getY();
-
-    //this.game.stage.scale.startFullScreen();
-    // We want to scale up to the preferred resolution
-    this.game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
-    //this.game.stage.scaleMode = Phaser.StageScaleMode.SHOW_ALL;
-    this.game.scale.updateLayout();
-  }
-
-  // Event handlers
-  sendEvent (name, option) {
-
-    if (option == undefined) {
-  		option = {};
-  	}
-    // START: DEBUG!
-    console.log("Sending message: "+name+ " with option " + JSON.stringify(option));
-    // END: DEBUG
-    let event = document.createEvent('HTMLEvents')
-    event.initEvent(name, true, true);
-    event.option = option;
-  	document.dispatchEvent(event);
-  }
-
-  getEvent(name, funct) {
-  	return document.addEventListener(name, funct , false);
-  }
-
-  removeEvent(name, funct) {
-  	return document.removeEventListener(name, funct, false);
-  }
-  /* TODO: Fix watchobject so it watches other objects than game.load.hasLoaded :) */
-  watchObject(objname, func, options)
-  {
-    console.log("Watch object");
-    var param = options.param === undefined ? undefined : options.param;
-    var changeInto = options.changeInto === undefined ? undefined : options.changeInto;
-    var recursive = options.recursive === undefined ? false : options.recurisve;
-    var buffer = $_;
-    for (let x in objname.split(".")) {
-      buffer = buffer[objname.split(".")[x]];
-    }
-    var obj = buffer;
-    console.log("object is "+obj);
-    if (param === undefined & changeInto === undefined) {
-      changeInto = false;
-    } else {
-      changeInto = changeInto === undefined ? true : changeInto;
-    }
-    if (param === undefined) {
-      var param = obj;
+        this.stage = new PIXI.Container();
+        this.renderer.render(this.stage);
+        this.time = new Date();
+        this.init();
     }
 
-    var changeHappend = function() {
-      func();
-    };
-    var callBack = function(objname, param, changeInto, recursive, func) {
-      setTimeout(function(){
-        var options = {param: param,
-                        changeInto: changeInto,
-                        recursive: recursive};
-
-        this.watchObject(objname, func, options);
-      }.bind(this), 300);
-    }.bind(this);
-
-
-    if (changeInto === true & obj === param) {
-      changeHappend();
-      if (recursive) callBack(objname, param, changeInto, recursive, func);
+    setResolution() {
+        // This sets the dimensions of the canvas to the view height and width
+        // TODO: set to a fixed size and scale all assets with nearest neighbour
+        this.viewWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
+        this.viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+        this.renderer.resize(this.viewWidth, this.viewHeight);
     }
 
-    else if (changeInto === false & obj !== param) {
-      changeHappend();
-      if (recursive) callBack(objname, param, changeInto, recursive, func);
+    // Initialize objects and assets here
+    init() {
+        this.worldMap = new WorldMap();
+        /*
+        var dirtTexture = PIXI.Texture.fromImage('assets/dirt.png');
+        this.dirt = new PIXI.Sprite(dirtTexture);
+        this.dirt.position.x = 200;
+        this.dirt.position.y = 150;
+
+        var grassTexture = PIXI.Texture.fromImage('assets/grass.png');
+        this.grass = new PIXI.Sprite(grassTexture);
+        this.grass.position.x = 210;
+        this.grass.position.y = 160;
+
+        var houseTexture = PIXI.Texture.fromImage('assets/house.png');
+        this.house = new PIXI.Sprite(houseTexture);
+        this.house.position.x = 220;
+        this.house.position.y = 170;
+
+        this.stage.addChild(this.dirt);
+        this.stage.addChild(this.grass);
+        this.stage.addChild(this.house);
+        this.forwards = true;
+        this.up = true;*/
+        this.animate();
     }
-    else {
-      callBack(objname, param, changeInto, recursive, func);
+
+    // Main game loop, call updates here
+    animate() {
+        this.animateEv = this.animate.bind(this);
+        requestAnimationFrame(this.animateEv);
+
+        /*
+        this.dirt.rotation += 0.1;
+        this.grass.rotation -= 0.1;
+        if (this.dirt.x > this.viewWidth) {
+            this.forwards = false;
+        }
+        if (this.dirt.x < 0) {
+            this.forwards = true;
+        }
+
+        if (this.forwards) {
+            this.dirt.x += 10;
+            this.grass.x += 10;
+            this.house.x += 10;
+        }
+        else {
+            this.dirt.x -= 10;
+            this.grass.x -= 10;
+            this.house.x -= 10;
+        }
+
+        if (this.dirt.y > this.viewHeight) {
+            this.up = false;
+        }
+        if (this.dirt.y < 0) {
+            this.up = true;
+        }
+
+        if (this.up) {
+            this.dirt.y += 10;
+            this.grass.y += 10;
+            this.house.y += 10;
+        }
+        else {
+            this.dirt.y -= 10;
+            this.grass.y -= 10;
+            this.house.y -= 10;
+        }*/
+
+        // render the container
+        this.renderer.render(this.stage);
     }
-
-  }
-
-  clear() {
-    $_.game.world.removeAll()
-  }
-
-  preload() {
-    window.addEventListener('resize', function () {
-      $_.game.renderer.resize(100, 100);
-      $_.getResolution();
-      $_.setResolution();
-    });
-    $_.game.stage.backgroundColor = "#333333";
-
-    $_.getResolution();
-    $_.setResolution();
-    $_.game.load.image('player', 'assets/player.png');
-  }
-
-  create() {
-    $_.input = new InputHandler();
-    $_.map = new WorldMap();
-    $_.menu = new Menu();
-    this.player = new Player(200, 200, "player");
-  }
-
-  update() {
-    if($_.minimap !== undefined){
-      $_.minimap.update();
-    }
-    $_.input.update();
-  }
-
-  render() {}
 }
+
+let $_ = new Canvas();

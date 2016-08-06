@@ -2,51 +2,27 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
+  <meta charset='utf-8' />
   <title>Cult Of Maybe</title>
- <link rel="stylesheet" type="text/css" href="/css/reset.css">
- <link rel="stylesheet" type="text/css" href="/css/minimap.css">
+ <link rel='stylesheet' type='text/css' href='/css/reset.css'>
+ <link rel='stylesheet' type='text/css' href='/css/minimap.css'>
 </head>
 
 <body>
 
+  <div class='canvasContainer'></div>
+
   <!-- Should always be loaded first !-->
-  <script src="/socket.io/socket.io.js"></script>
-  <script src='../node_modules/phaser/build/phaser.js'></script>
+  <script src='/socket.io/socket.io.js'></script>
+  <script src='../node_modules/pixi.js/bin/pixi.js'></script>
 
-  <script src="library/map/pos.js"></script>
-  <script src="library/map/map.js"></script>
-
-  <script src="library/tile/tiles.js"></script>
-
-  <script src="library/menu.js"></script>
-
-  <script src="library/inputHandler.js"></script>
-  <script src="library/things/player.js"></script>
-  <script src="library/things/minimap.js"></script>
-  <script src='library/nw.js'></script>
-
-  <script src='library/Canvas.js'></script>
+  <script src='library/canvas.js'></script>
+  <script src='library/map/map.js'></script>
 
   <!-- Should always be loaded last !-->
   <script src='library/init.js'></script>
   
   </div>
-  <script>
-/*
-    var minihax = function minihax(ev) {
-      var x = ev.layerX;
-      var y = ev.layerY;
-      var cameraPosY = (y / 200) * ($_.map.height * $_.map.tile.y);
-
-      $_.game.camera.y = (y / 200) * ($_.map.height * $_.map.tile.y) - ($_.game.camera.height / 2);
-      $_.game.camera.x = (x / 200) * ($_.map.width * $_.map.tile.x) - ($_.game.camera.width / 2);
-
-    }
-    var el = document.getElementById('minimap');
-    el.addEventListener('click', minihax);
-    */
-  </script>
 </body>
 
 </html>

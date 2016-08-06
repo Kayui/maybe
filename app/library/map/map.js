@@ -11,8 +11,6 @@ class WorldMap {
     console.log("Request map");
     $_.sendEvent('ClientReady');
     socket.on('connect',function(){
-      console.log("Sendi request");
-      socket.emit('Map:Get:WorldMap', {data: 'hey' });
       socket.on('Map:New:WorldMap', function(data) {
         console.log("Got map");
         this.cleanmap();

@@ -5,7 +5,8 @@ class TextureHandler {
     }
 
     add(key, item){
-        return this.textures.set(key, item)
+        this.textures.set(key, item);
+        return this.textures.get(key);
     }
     
     get(key){

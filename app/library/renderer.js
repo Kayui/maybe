@@ -17,7 +17,10 @@ class Renderer {
             transparent: false,
             resolution: 1
         });
-        this.stage = new PIXI.Container();
+
+        // Testing multiple stages
+        this.stage1 = new PIXI.Container();
+        this.stage2 = new PIXI.Container();
     }
 
     setResolution() {
@@ -33,92 +36,56 @@ class Renderer {
         this.canvas = this.canvasContainer.appendChild(this.renderer.view);
     }
 
-    addSprite(key, texture){
-        return this.sprites.add(key, texture);
+    // Takes in a texture object, creates, stores and returns a sprite
+    addSpriteFromTexture(key, texture) {
+
+        return this.sprites.add(key, new PIXI.Sprite(texture));
     }
 
-    loadTextureFromImg(key, url){
-        return this.textures.add(key, PIXI.Texture.fromImage(url));
+    // Takes in a sprite object, stores and returns it
+    addSpriteObject(key, object) {
+        return this.sprites.add(key, object);
+    }
+
+    // Takes in an image url, creates a texture, stores and returns it
+    addTextureFromImage(key, image) {
+        console.log("Added Texture: " + key + " : " + image);
+        return this.textures.add(key, PIXI.Texture.fromImage(image));
+    }
+
+    // Takes in a texture object, stores and returns it
+    addTextureFromObject(key, object) {
+        return this.textures.add(key, object);
     }
 
     // Initialize objects and assets here
     initAssets() {
-        this.addSprite('grass', this.loadTextureFromImg('grass','assets/grass.png'));
+        this.addSpriteFromTexture('grass', this.addTextureFromImage('grass', 'assets/grass.png'));
+        this.sprites.get('grass').position.x = 200;
+        this.sprites.get('grass').position.y = 200;
 
-        /*
-        var dirtTexture = PIXI.Texture.fromImage('assets/dirt.png');
-        this.dirt = new PIXI.Sprite(dirtTexture);
-        this.dirt.position.x = 200;
-        this.dirt.position.y = 150;
-
-        var grassTexture = PIXI.Texture.fromImage('assets/grass.png');
-        this.grass = new PIXI.Sprite(grassTexture);
-        this.grass.position.x = 210;
-        this.grass.position.y = 160;
-
-        var houseTexture = PIXI.Texture.fromImage('assets/house.png');
-        this.house = new PIXI.Sprite(houseTexture);
-        this.house.position.x = 220;
-        this.house.position.y = 170;
-
-        this.stage.addChild(this.dirt);
-        this.stage.addChild(this.grass);
-        this.stage.addChild(this.house);
-        */
-        this.forwards = true;
-        this.up = true;
-    }
-
-    addTexture(key, path) {
-        // adds a new texture object to the texture array
-        // texture object:
-        // texture.push(new Texture(key, pixi texture object))
+        this.addSpriteFromTexture('dirt', this.addTextureFromImage('dirt', 'assets/dirt.png'));
+        this.sprites.get('dirt').position.x = 200;
+        this.sprites.get('dirt').position.y = 200;
+        
+        this.stage1.addChild(this.sprites.get('grass'));
+        this.stage2.addChild(this.sprites.get('dirt'));
     }
 
     // Main game loop, call updates here
     animate() {
         this.animateEv = this.animate.bind(this);
         requestAnimationFrame(this.animateEv);
-        /*
-        this.dirt.rotation += 0.1;
-        this.grass.rotation -= 0.1;
-        if (this.dirt.x > this.viewWidth) {
-            this.forwards = false;
-        }
-        if (this.dirt.x < 0) {
-            this.forwards = true;
-        }
 
-        if (this.forwards) {
-            this.dirt.x += 10;
-            this.grass.x += 10;
-            this.house.x += 10;
-        }
-        else {
-            this.dirt.x -= 10;
-            this.grass.x -= 10;
-            this.house.x -= 10;
-        }
+        this.sprites.get('grass').position.x += 1;
 
-        if (this.dirt.y > this.viewHeight) {
-            this.up = false;
-        }
-        if (this.dirt.y < 0) {
-            this.up = true;
-        }
-
-        if (this.up) {
-            this.dirt.y += 10;
-            this.grass.y += 10;
-            this.house.y += 10;
-        }
-        else {
-            this.dirt.y -= 10;
-            this.grass.y -= 10;
-            this.house.y -= 10;
-        }
-        */
         // render the container
-        this.renderer.render(this.stage);
+        if(this.sprites.get('grass').position.x > 300){
+        this.renderer.render(this.stage2);
+            
+        }
+        else{
+            this.renderer.render(this.stage1);
+        }
     }
 }

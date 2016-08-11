@@ -1,20 +1,23 @@
 'use strict';
-class Canvas {
+class Renderer {
     constructor() {
+        this.textures = new TextureHandler();
+        this.sprites = new SpriteHandler();
+
+        this.initRender();
+        this.setResolution();
+        this.createCanvas();
+        this.initAssets();
+        this.animate();
+    }
+
+    initRender() {
         this.renderer = PIXI.autoDetectRenderer(640, 480, {
             antialias: false,
             transparent: false,
             resolution: 1
         });
-
-        this.setResolution();
-        let canvasContainer = document.getElementsByClassName("canvasContainer")[0];
-        let canvas = canvasContainer.appendChild(this.renderer.view);
-
         this.stage = new PIXI.Container();
-        this.renderer.render(this.stage);
-        this.time = new Date();
-        this.init();
     }
 
     setResolution() {
@@ -25,9 +28,23 @@ class Canvas {
         this.renderer.resize(this.viewWidth, this.viewHeight);
     }
 
+    createCanvas() {
+        this.canvasContainer = document.getElementsByClassName("canvasContainer")[0];
+        this.canvas = this.canvasContainer.appendChild(this.renderer.view);
+    }
+
+    addSprite(key, texture){
+        return this.sprites.add(key, texture);
+    }
+
+    loadTextureFromImg(url){
+        return this.textures.add(key, PIXI.Texture.fromImage(url));
+    }
+
     // Initialize objects and assets here
-    init() {
-        this.worldMap = new WorldMap();
+    initAssets() {
+        this.addSprite('grass', this.loadTextureFromImg('grass','assets/grass.png'));
+
         /*
         var dirtTexture = PIXI.Texture.fromImage('assets/dirt.png');
         this.dirt = new PIXI.Sprite(dirtTexture);
@@ -47,16 +64,21 @@ class Canvas {
         this.stage.addChild(this.dirt);
         this.stage.addChild(this.grass);
         this.stage.addChild(this.house);
+        */
         this.forwards = true;
-        this.up = true;*/
-        this.animate();
+        this.up = true;
+    }
+
+    addTexture(key, path) {
+        // adds a new texture object to the texture array
+        // texture object:
+        // texture.push(new Texture(key, pixi texture object))
     }
 
     // Main game loop, call updates here
     animate() {
         this.animateEv = this.animate.bind(this);
         requestAnimationFrame(this.animateEv);
-
         /*
         this.dirt.rotation += 0.1;
         this.grass.rotation -= 0.1;
@@ -94,11 +116,9 @@ class Canvas {
             this.dirt.y -= 10;
             this.grass.y -= 10;
             this.house.y -= 10;
-        }*/
-
+        }
+        */
         // render the container
         this.renderer.render(this.stage);
     }
 }
-
-let $_ = new Canvas();

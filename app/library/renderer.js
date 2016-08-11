@@ -37,7 +37,7 @@ class Renderer {
         return this.sprites.add(key, texture);
     }
 
-    loadTextureFromImg(url){
+    loadTextureFromImg(key, url){
         return this.textures.add(key, PIXI.Texture.fromImage(url));
     }
 

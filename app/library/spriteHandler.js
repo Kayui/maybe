@@ -5,10 +5,10 @@ class SpriteHandler {
     }
 
     add(key, item){
-        return this.sprite.set(key, item)
+        return this.sprites.set(key, item)
     }
-    
+
     get(key){
-        return this.sprite.get(key);
+        return this.sprites.get(key);
     }
 }

@@ -10,4 +10,4 @@ var connectToServer = function() {
     socket.emit('Map:Get:WorldMap', {data: 'hey' });
   });
 };
-$_.getEvent('ClientReady', connectToServer);
+// $_.getEvent('ClientReady', connectToServer);
